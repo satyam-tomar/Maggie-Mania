@@ -23,6 +23,6 @@ The platform enables users to securely place orders, manage sessions, and track 
 
 ## Installation
 ```bash
-git clone https://github.com/your-username/maggie-mania.git
+git clone https://github.com/satyam-tomar/maggie-mania.git
 cd maggie-mania
 npm install
