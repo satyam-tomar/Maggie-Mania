@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Maggie Express - Hot & Delicious</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div class="discount-bar">
+    Every room will get <strong>30% discount</strong> on first order!
+  </div>
+
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-brand">
+        <span class="brand-icon">🍜</span>
+        <span class="brand-text">Maggie Mania</span>
+      </div>
+      <div class="nav-links">
+        <% if (user) { %>
+          <span class="user-name">Hi, <%= user.name.split(' ')[0] %></span>
+          <a href="/orders/my-orders" class="nav-link">My Orders</a>
+          <a href="/auth/logout" class="nav-link logout-btn">Logout</a>
+        <% } else { %>
+          <a href="/auth/login" class="nav-link">Login</a>
+          <a href="/auth/signup" class="nav-link login-btn">Sign Up</a>
+        <% } %>
+      </div>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div>
+      <div class="hero-timing animate-slide-in">
+        <span>Open from <strong>11:30 PM</strong> to <strong>2:00 AM</strong></span><br>
+        <span>Only for <strong>BH5</strong> and <strong>BH6</strong></span>
+      </div>
+    
+      <div class="hero-content">
+        <h1 class="hero-title animate-fade-in">Hot, Tasty<br><span class="highlight">Maggie</span> Delivered!</h1>
+        <p class="hero-subtitle animate-fade-in-delay">Craving delicious Maggie? Order now and get it delivered hot to your hostel room!</p>
+        <button class="cta-button animate-bounce" onclick="openOrderModal()">
+          Order Now
+          <span class="button-icon">🔥</span>
+        </button>
+      </div>
+    </div>
+    <div class="hero-images" style="display:flex; justify-content:center;">
+      <div style="display:flex; gap:16px; align-items:center;">
+    
+        <!-- Left large image -->
+        <img 
+          src="/images/3d-illustrated-fried-food.jpg" 
+          alt="image"
+          style="
+            height:400px;
+            width:auto;
+            border-radius:2rem;
+            box-shadow:0 8px 20px rgba(0,0,0,0.15);
+            transition:all 0.3s ease;
+          "
+          onmouseover="this.style.boxShadow='0 14px 30px rgba(0,0,0,0.25)'"
+          onmouseout="this.style.boxShadow='0 8px 20px rgba(0,0,0,0.15)'"
+        />
+    
+        <!-- Right stacked images -->
+        <div style="display:flex; flex-direction:column; gap:16px;">
+          <img 
+            src="/images/pre-prepared-food-showcasing-ready-eat-delicious-meals-go.jpg" 
+            alt="image"
+            style="
+              height:190px;
+              width:auto;
+              border-radius:2rem;
+              box-shadow:0 8px 20px rgba(0,0,0,0.15);
+              transition:all 0.3s ease;
+            "
+            onmouseover="this.style.boxShadow='0 14px 30px rgba(0,0,0,0.25)'"
+            onmouseout="this.style.boxShadow='0 8px 20px rgba(0,0,0,0.15)'"
+          />
+    
+          <img 
+            src="/images/bottom-view-ramen-noodles-with-coriander-bowl-dark-table.jpg" 
+            alt="image"
+            style="
+              height:190px;
+              width:auto;
+              border-radius:2rem;
+              box-shadow:0 8px 20px rgba(0,0,0,0.15);
+              transition:all 0.3s ease;
+            "
+            onmouseover="this.style.boxShadow='0 14px 30px rgba(0,0,0,0.25)'"
+            onmouseout="this.style.boxShadow='0 8px 20px rgba(0,0,0,0.15)'"
+          />
+        </div>
+    
+      </div>
+    </div>
+    
+  </section>
+
+  <section class="add-to-cart">
+    <div class="container">
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-image">
+            <img src="/images/world-cuisine-with-delicious-food.jpg" alt="Special Maggie 3">
+          </div>
+          <h3>Classic Maggie</h3>
+          <p>The original taste that everyone loves. Perfectly cooked with traditional masala.</p>
+        </div>
+  
+        <div class="card">
+          <div class="card-image">
+            <img src="/images/street-food-still-life.jpg" alt="Special Maggie 3">
+          </div>
+          <h3>Double Maggie</h3>
+          <p>Two packets for sharing or when you' re extra hungry. Double the joy!</p>
+      </div>
+
+      <div class="card">
+        <div class="card-image">
+          <img src="/images/world-cuisine-with-delicious-food (1).jpg" alt="Special Maggie 3">
+        </div>
+        <h3>Spicy Maggie</h3>
+        <p>Extra spicy Maggie for the daring ones.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-image">
+          <img
+            src="/images/top-view-asian-ramen-noodles-bowl-pink-white-checkered-tablecloth-raw-ramen-noodle-chopping-board-dark-background.jpg"
+            alt="Special Maggie 4">
+        </div>
+        <h3>Desi Ghee Maggie</h3>
+        <p>Rich and aromatic Maggie cooked in pure desi ghee. A royal treat!</p>
+      </div>
+    </div>
+
+    <div class="explore-all">
+      <button class="explore-btn" onclick="openOrderModal()">Explore All</button>
+    </div>
+    </div>
+    </section>
+
+    <section class="features">
+      <div class="container">
+        <h2 class="section-title animate-fade-in">Why Choose Maggie Mania?</h2>
+        <div class="feature-grid">
+          <div class="feature-card animate-pop-up">
+            <div class="feature-icon">⚡</div>
+            <h3>Quick Delivery</h3>
+            <p>Get your hot Maggie delivered within minutes, straight to your hostel room.</p>
+          </div>
+          <div class="feature-card animate-pop-up" style="animation-delay: 0.2s;">
+            <div class="feature-icon">💰</div>
+            <h3>Best Prices</h3>
+            <p>Affordable prices with amazing discounts and exclusive offers on first orders.</p>
+          </div>
+          <div class="feature-card animate-pop-up" style="animation-delay: 0.4s;">
+            <div class="feature-icon">🌶️</div>
+            <h3>Extra Masala</h3>
+            <p>Customize your Maggie with extra masala for the perfect spicy kick.</p>
+          </div>
+          <div class="feature-card animate-pop-up" style="animation-delay: 0.6s;">
+            <div class="feature-icon">🍲</div>
+            <h3>Fresh Ingredients</h3>
+            <p>Prepared daily with fresh ingredients for the best taste and aroma.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div id="orderModal" class="modal">
+      <div class="modal-content">
+        <span class="close-modal" onclick="closeOrderModal()">&times;</span>
+        <h2 class="modal-title">Choose Your Maggie</h2>
+
+        <div class="menu-items">
+          <div class="menu-item" data-name="1 Packet Maggie" data-price="25" data-original="30">
+            <div class="item-image">
+              <img src="/images/bottom-view-ramen-noodles-with-coriander-bowl-dark-table.jpg" alt="" style="width: 120px; border-radius: 2rem;">
+
+            </div>
+            <div class="item-details">
+              <h3>1 Packet Maggie</h3>
+              <div class="price-section">
+                <span class="current-price">₹25</span>
+                <span class="original-price">₹30</span>
+                <span class="discount-badge">17% OFF</span>
+              </div>
+              <label class="masala-checkbox">
+                <input type="checkbox" class="masala-extra" data-packets="1">
+                Add Extra Masala (+₹5)
+              </label>
+              <div class="quantity-control">
+                <button class="qty-btn minus">-</button>
+                <input type="number" class="qty-input" value="0" min="0" max="50" readonly>
+                <button class="qty-btn plus">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="menu-item" data-name="2 Packet Maggie" data-price="40" data-original="45">
+            <div class="item-image">
+              <img src="/images/street-food-still-life.jpg" alt="" style="height: 120px; border-radius: 2rem;">
+
+            </div>
+            <div class="item-details">
+              <h3>2 Packet Maggie</h3>
+              <div class="price-section">
+                <span class="current-price">₹40</span>
+                <span class="original-price">₹45</span>
+                <span class="discount-badge">11% OFF</span>
+              </div>
+              <label class="masala-checkbox">
+                <input type="checkbox" class="masala-extra" data-packets="2">
+                Add Extra Masala (+₹5)
+              </label>
+              <div class="quantity-control">
+                <button class="qty-btn minus">-</button>
+                <input type="number" class="qty-input" value="0" min="0" max="50" readonly>
+                <button class="qty-btn plus">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="menu-item" data-name="Desi Ghee Maggie" data-price="60" data-original="70">
+            <div class="item-image">
+              <img
+            src="/images/top-view-asian-ramen-noodles-bowl-pink-white-checkered-tablecloth-raw-ramen-noodle-chopping-board-dark-background.jpg"
+            alt="Special Maggie 4" style="height: 80px; border-radius: 2rem;">
+            </div>
+            <div class="item-details">
+              <h3>Desi Ghee Maggie</h3>
+              <div class="price-section">
+                <span class="current-price">₹60</span>
+                <span class="original-price">₹70</span>
+                <span class="discount-badge">14% OFF</span>
+              </div>
+              <label class="masala-checkbox">
+                <input type="checkbox" class="masala-extra" data-packets="1">
+                Add Extra Masala (+₹5)
+              </label>
+              <div class="quantity-control">
+                <button class="qty-btn minus">-</button>
+                <input type="number" class="qty-input" value="0" min="0" max="50" readonly>
+                <button class="qty-btn plus">+</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="cart-summary">
+          <h3>Cart Summary</h3>
+          <div id="cartItems"></div>
+          <div class="total-section">
+            <span>Total Amount:</span>
+            <span class="total-price">₹0</span>
+          </div>
+          <button class="checkout-btn" onclick="proceedToCheckout()" disabled>
+            Proceed to Checkout
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div id="checkoutModal" class="modal">
+      <div class="modal-content checkout-content">
+        <span class="close-modal" onclick="closeCheckoutModal()">&times;</span>
+        <h2 class="modal-title">Delivery Details</h2>
+
+        <form id="checkoutForm" class="checkout-form">
+          <div class="form-group">
+            <label>Name *</label>
+            <input type="text" name="name" required value="<%= user ? user.name : '' %>">
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label>Phone Number *</label>
+              <input type="tel" name="phone" required pattern="[6-9][0-9]{9}"
+                value="<%= user && user.phone ? user.phone : '' %>">
+            </div>
+            <div class="form-group">
+              <label>Email *</label>
+              <input type="email" name="email" required value="<%= user ? user.email : '' %>">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label>Block *</label>
+              <input type="text" name="block" required value="<%= user && user.block ? user.block : '' %>">
+            </div>
+            <div class="form-group">
+              <label>Hostel *</label>
+              <input type="text" name="hostel" required value="<%= user && user.hostel ? user.hostel : '' %>">
+            </div>
+            <div class="form-group">
+              <label>Room Number *</label>
+              <input type="text" name="roomNumber" required
+                value="<%= user && user.roomNumber ? user.roomNumber : '' %>">
+            </div>
+          </div>
+
+          <div class="payment-info">
+            <div class="payment-badge">
+              <span class="payment-icon">💵</span>
+              <span>Cash on Delivery</span>
+            </div>
+          </div>
+
+          <div class="order-summary-checkout">
+            <h3>Order Summary</h3>
+            <div id="checkoutCartItems"></div>
+            <div class="total-checkout">
+              <span>Total Amount:</span>
+              <span class="total-price-checkout">₹0</span>
+            </div>
+          </div>
+
+          <button type="submit" class="place-order-btn">
+            Place Order
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <p>&copy; 2025 Maggie Express. Made with ❤️ for Maggie lovers</p>
+    </footer>
+
+    <script src="/js/main.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up - Maggie Express</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="auth-container">
+    <div class="auth-card">
+      <div class="auth-header">
+        <div class="auth-icon">🍜</div>
+        <h2>Join Maggie Express</h2>
+        <p>Create your account to start ordering delicious Maggie!</p>
+      </div>
+
+      <form id="signupForm" class="auth-form">
+        <div class="form-group">
+          <label>Full Name *</label>
+          <input type="text" name="name" required placeholder="Enter your full name">
+        </div>
+
+        <div class="form-group">
+          <label>Email Address *</label>
+          <input type="email" name="email" required placeholder="your.email@example.com">
+        </div>
+
+        <div class="form-group">
+          <label>Password *</label>
+          <input type="password" name="password" required placeholder="Minimum 6 characters">
+          <small>Password must be at least 6 characters long</small>
+        </div>
+
+        <div class="form-group">
+          <label>Phone Number *</label>
+          <input type="tel" name="phone" required pattern="[6-9][0-9]{9}" placeholder="10-digit mobile number">
+          <small>Enter valid Indian mobile number</small>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Block *</label>
+            <input type="text" name="block" required placeholder="e.g., A, B, C">
+          </div>
+          <div class="form-group">
+            <label>Hostel *</label>
+            <input type="text" name="hostel" required placeholder="e.g., Boys Hostel 1">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Room Number *</label>
+          <input type="text" name="roomNumber" required placeholder="e.g., 101, 202">
+        </div>
+
+        <div id="errorMessages" class="error-messages"></div>
+
+        <button type="submit" class="auth-submit-btn">
+          Create Account
+        </button>
+      </form>
+
+      <div class="auth-footer">
+        <p>Already have an account? <a href="/auth/login" class="auth-link">Login here</a></p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('signupForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const formData = new FormData(e.target);
+      const data = Object.fromEntries(formData);
+      
+      const phone = data.phone;
+      if (!/^[6-9]\d{9}$/.test(phone)) {
+        document.getElementById('errorMessages').innerHTML = 
+          '<p class="error-msg">Please enter a valid 10-digit Indian mobile number</p>';
+        return;
+      }
+      
+      if (data.password.length < 6) {
+        document.getElementById('errorMessages').innerHTML = 
+          '<p class="error-msg">Password must be at least 6 characters</p>';
+        return;
+      }
+      
+      const submitBtn = e.target.querySelector('button[type="submit"]');
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Creating Account...';
+      
+      try {
+        const response = await fetch('/auth/signup', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data)
+        });
+        
+        const result = await response.json();
+        
+        if (result.success) {
+          window.location.href = result.redirect;
+        } else {
+          const errorHtml = result.errors.map(err => 
+            `<p class="error-msg">${err.msg}</p>`
+          ).join('');
+          document.getElementById('errorMessages').innerHTML = errorHtml;
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Create Account';
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        document.getElementById('errorMessages').innerHTML = 
+          '<p class="error-msg">Something went wrong. Please try again.</p>';
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Create Account';
+      }
+    });
+  </script>
+</body>
+</html>

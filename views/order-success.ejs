@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order Placed - Maggie Express</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-brand">
+        <span class="brand-icon">🍜</span>
+        <span class="brand-text">Maggie Express</span>
+      </div>
+      <div class="nav-links">
+        <a href="/" class="nav-link">Home</a>
+        <a href="/orders/my-orders" class="nav-link">My Orders</a>
+        <a href="/auth/logout" class="nav-link logout-btn">Logout</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="success-container">
+    <div class="success-card">
+      <div class="success-animation">
+        <div class="checkmark-circle">
+          <div class="checkmark"></div>
+        </div>
+      </div>
+
+      <h1 class="success-title">Order Placed Successfully! 🎉</h1>
+      <p class="success-subtitle">Your hot Maggie is being prepared</p>
+
+      <div class="order-details-box">
+        <div class="order-id">
+          <span>Order ID:</span>
+          <strong>#<%= order._id.toString().slice(-8).toUpperCase() %></strong>
+        </div>
+
+        <div class="delivery-info">
+          <h3>Delivery To:</h3>
+          <p><strong><%= order.deliveryDetails.name %></strong></p>
+          <p>📞 <%= order.deliveryDetails.phone %></p>
+          <p>📍 Room <%= order.deliveryDetails.roomNumber %>, <%= order.deliveryDetails.block %> Block, <%= order.deliveryDetails.hostel %></p>
+        </div>
+
+        <div class="order-items-success">
+          <h3>Items Ordered:</h3>
+          <% order.items.forEach(item => { %>
+            <div class="success-item">
+              <span><%= item.name %> × <%= item.quantity %></span>
+              <span>₹<%= (item.price * item.quantity + item.masalaCost).toFixed(0) %></span>
+            </div>
+            <% if (item.hasExtraMasala) { %>
+              <div class="success-item-extra">
+                <span>Extra Masala</span>
+                <span>₹<%= item.masalaCost %></span>
+              </div>
+            <% } %>
+          <% }); %>
+        </div>
+
+        <div class="total-success">
+          <span>Total Amount:</span>
+          <strong>₹<%= order.totalAmount %></strong>
+        </div>
+
+        <div class="payment-method-display">
+          <span class="payment-icon">💵</span>
+          <span>Cash on Delivery</span>
+        </div>
+      </div>
+
+      <div class="success-actions">
+        <a href="/" class="btn-secondary">Order More</a>
+        <a href="/orders/my-orders" class="btn-primary">View My Orders</a>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <p>&copy; 2025 Maggie Express. Made with ❤️ for Maggie lovers</p>
+  </footer>
+</body>
+</html>
