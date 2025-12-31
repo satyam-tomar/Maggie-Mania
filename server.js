@@ -52,6 +52,8 @@ app.use('/', indexRoutes);
 app.use('/auth', authRoutes);
 app.use('/orders', orderRoutes);
 app.use('/user', userRoutes);
+app.use('/admin', require('./routes/admin'));
+
 
 app.use((req, res) => {
   res.status(404).render('error', { 
